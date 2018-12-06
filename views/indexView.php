@@ -63,10 +63,16 @@ if (isset($message)) {
 						<h4>Transfert</h4>
 						<label>Entrer une somme à transférer</label>
 						<input type="number" name="balance" placeholder="Ex: 300"  required>
-						<input type="hidden" name="idDebit" value="<?php // Afficher ici l'id du compte à débiter?>" required>
+						<input type="hidden" name="idDebit" value="<?= $account->getId(); ?>" required>
 						<label for="">Sélectionner un compte pour le virement</label>
 						<select name="idPayment" required>
-							<option value="" disabled>Choisir un compte</option>
+							<option disabled>Choisir un compte</option>
+							<?php
+                                foreach ($accounts as $account) {
+                                    ?>
+									<option value="<?= $account->getId(); ?>"><?= $account->getName(); ?></option>
+									<?php
+                                } ?>
 						</select>
 						<input type="submit" name="transfer" value="Transférer l'argent">
 					</form>

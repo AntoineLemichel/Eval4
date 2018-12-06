@@ -128,4 +128,37 @@ class Account
             return $this;
         }
     }
+
+    /**
+     * Payment for account.
+     *
+     * @param int $payment
+     *
+     * @return self
+     */
+    public function payment(int $payment)
+    {
+        $payment = (int) $payment;
+        if (is_int($payment)) {
+            $this->balance += $payment;
+
+            return $this;
+        }
+    }
+
+    public function debit(int $debit)
+    {
+        $debit = (int) $debit;
+        if (is_int($debit)) {
+            $this->balance -= $debit;
+
+            return $this;
+        }
+    }
+
+    // public function transfert(int $transfert){
+    //     if(is_int($transfert)){
+    //         $this->balance +=
+    //     }
+    // }
 }

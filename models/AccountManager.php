@@ -62,15 +62,6 @@ class AccountManager
         return $arrayOfAccounts;
     }
 
-    // public function getName(Account $name)
-    // {
-    //     $arrayOfName = [];
-    //     $req_name = $this->getDb()->prepare('SELECT * FROM accounts WHERE name = :name');
-    //     $req_name->bindValue(':name', $name->getName(), PDO::PARAM_STR);
-
-    //     $req_name->execute();
-    // }
-
     /**
      * Adding a new account into database.
      *
@@ -85,6 +76,11 @@ class AccountManager
         $reqAccount->execute();
     }
 
+    /**
+     * Remove account with ID.
+     *
+     * @param Account $account
+     */
     public function removeAccount(Account $account)
     {
         $reqRemove = $this->getDb()->prepare('DELETE FROM accounts WHERE id = :id');
@@ -92,6 +88,13 @@ class AccountManager
         $reqRemove->execute();
     }
 
+    /**
+     * Get account by ID.
+     *
+     * @param int $id
+     *
+     * @return new Account
+     */
     public function getAccountById($id)
     {
         $reqAccountById = $this->getDb()->prepare('SELECT * FROM accounts WHERE id = :id');
@@ -100,8 +103,34 @@ class AccountManager
 
         $dataAccount = $reqAccountById->fetch(PDO::FETCH_ASSOC);
 
-        $account = new Account($dataAccount);
+        return new Account($dataAccount);
+    }
 
-        return $account;
+    /**
+     * Give a payment for account.
+     *
+     * @param Account $opponent
+     */
+    public function accountBalance(Account $opponent)
+    {
+        $reqPayment = $this->getDb()->prepare('UPDATE accounts SET balance = :balance WHERE id = :id');
+        $reqPayment->bindValue(':id', $opponent->getId(), PDO::PARAM_INT);
+        $reqPayment->bindValue(':balance', $opponent->getBalance(), PDO::PARAM_INT);
+        $reqPayment->execute();
+    }
+
+    public function getAllName()
+    {
+        $arrayOfNames = [];
+        $reqName = $this->getDb()->prepare('SELECT * FROM accounts');
+        $reqName->execute();
+
+        $dataNames = $reqName->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($dataNames as $dataName) {
+            $arrayOfNames[] = new Account($dataName);
+        }
+
+        return $arrayOfNames;
     }
 }
