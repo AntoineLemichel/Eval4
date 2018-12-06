@@ -83,7 +83,7 @@ class Account
      *
      * @return self
      */
-    public function setId(int $id)
+    public function setId($id)
     {
         $id = (int) $id;
         if (is_int($id)) {
@@ -118,7 +118,7 @@ class Account
      *
      * @return self
      */
-    public function setBalance(int $balance)
+    public function setBalance($balance)
     {
         $balance = (int) $balance;
 
