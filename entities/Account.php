@@ -150,15 +150,15 @@ class Account
     {
         $debit = (int) $debit;
         if (is_int($debit)) {
-            $this->balance -= $debit;
+            if ($this->balance < $debit) {
+                $message = 'Not possible';
 
-            return $this;
+                return $message;
+            } else {
+                $this->balance -= $debit;
+
+                return $this;
+            }
         }
     }
-
-    // public function transfert(int $transfert){
-    //     if(is_int($transfert)){
-    //         $this->balance +=
-    //     }
-    // }
 }

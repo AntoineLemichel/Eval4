@@ -1,10 +1,6 @@
 <?php
 
 include 'includes/header.php';
-
-if (isset($message)) {
-    echo '<p>'.$message.'</p>';
-}
 ?>
 
 <div class="container">
@@ -27,7 +23,11 @@ if (isset($message)) {
 		</select>
 		<input type="submit" name="new" value="Ouvrir un nouveau compte">
 	</form>
-
+<?php
+if (isset($message)) {
+    echo '<p>'.$message.'</p>';
+}
+?>
 	<hr>
 
 	<div class="main-content flex">
