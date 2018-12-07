@@ -68,10 +68,12 @@ if (isset($message)) {
 						<select name="idPayment" required>
 							<option disabled>Choisir un compte</option>
 							<?php
-                                foreach ($accounts as $account) {
-                                    ?>
-									<option value="<?= $account->getId(); ?>"><?= $account->getName(); ?></option>
+                                foreach ($accounts as $accountTransfert) {
+                                    if ($account->getId() != $accountTransfert->getId()) {
+                                        ?>
+									<option value="<?= $accountTransfert->getId(); ?>"><?= $accountTransfert->getName(); ?></option>
 									<?php
+                                    }
                                 } ?>
 						</select>
 						<input type="submit" name="transfer" value="Transférer l'argent">
